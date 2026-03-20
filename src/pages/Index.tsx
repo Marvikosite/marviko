@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
-import WindowDrawing from "@/components/WindowDrawing";
+
 
 import heroImg from "@/assets/hero-interior.jpg";
 import serviceWindows from "@/assets/service-windows.jpg";
