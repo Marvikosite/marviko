@@ -309,54 +309,111 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Pricing - LIGHT mosokna style */}
+      {/* Pricing - mosokna style clean cards */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <SectionLabel>Цены</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
-            <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с двухкамерным стеклопакетом, фурнитурой Winkhaus и монтажом</p>
+            <p className="text-muted-foreground text-body mb-8 max-w-xl">Стоимость окон ПВХ с монтажом. Выберите профильную систему для просмотра цен.</p>
           </AnimatedSection>
+
+          {/* Profile selector */}
+          <AnimatedSection delay={0.1}>
+            <div className="mb-10">
+              <p className="text-sm font-semibold text-foreground mb-3">Выберите профильную систему:</p>
+              <div className="flex flex-wrap gap-2">
+                {profileSystems.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => setSelectedProfile(p.id)}
+                    className="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border"
+                    style={{
+                      backgroundColor: selectedProfile === p.id ? "hsl(var(--primary))" : "white",
+                      color: selectedProfile === p.id ? "white" : "#1C1C1C",
+                      borderColor: selectedProfile === p.id ? "hsl(var(--primary))" : "#E2DDD5",
+                    }}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {pricingCards.map((card, i) => (
-              <AnimatedSection key={card.title} delay={i * 0.1}>
+            {currentPricing.map((card, i) => (
+              <AnimatedSection key={`${selectedProfile}-${card.type}`} delay={i * 0.08}>
                 <div
-                  className="rounded-xl overflow-hidden transition-all duration-300 flex flex-col bg-card border hover:shadow-lg relative"
-                  style={{
-                    borderColor: card.featured ? "hsl(var(--primary))" : "hsl(var(--border))",
-                    boxShadow: card.featured ? "0 0 0 1px hsl(var(--primary)), 0 4px 20px rgba(217,79,30,0.1)" : undefined,
-                  }}
+                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg"
+                  style={{ border: card.featured ? "2px solid hsl(var(--primary))" : "1px solid #E2DDD5" }}
                 >
                   {card.featured && (
-                    <div className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1.5 text-center">
+                    <div
+                      className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-3 py-1 rounded-full z-10"
+                      style={{ backgroundColor: "hsl(var(--primary))", color: "white" }}
+                    >
                       Популярный
                     </div>
                   )}
-                  {/* Window drawing area with landscape */}
-                  <div className="h-44 relative overflow-hidden flex items-center justify-center" style={{
-                    background: "linear-gradient(180deg, #e8f0f2 0%, #c8d8dc 50%, #a8c0a8 100%)",
-                  }}>
-                    {/* Landscape silhouette */}
-                    <svg className="absolute bottom-0 left-0 right-0 w-full" viewBox="0 0 200 60" preserveAspectRatio="none" style={{ height: "40%" }}>
-                      <path d="M0,60 L0,35 Q20,20 40,30 Q60,15 80,25 Q100,10 120,28 Q140,18 160,30 Q180,22 200,35 L200,60 Z" fill="rgba(80,120,80,0.25)" />
-                      <path d="M0,60 L0,45 Q30,35 60,42 Q90,30 120,40 Q150,32 180,42 L200,38 L200,60 Z" fill="rgba(60,100,60,0.2)" />
-                    </svg>
-                    <WindowDrawing type={card.type} className="relative z-10 drop-shadow-md" />
+
+                  {/* SVG Window illustration */}
+                  <div className="flex items-center justify-center py-6 px-4">
+                    <PricingWindowSVG type={card.type} />
                   </div>
-                  <div className="p-5 flex-1 flex flex-col">
-                    <h3 className="font-bold text-base mb-1 text-foreground">{card.title}</h3>
-                    <p className="text-xs mb-1 font-mono text-muted-foreground">Размер {card.size}</p>
-                    <p className="text-xs text-muted-foreground">{card.specs}</p>
-                    <p className="text-xs text-muted-foreground">{card.glass}</p>
-                    <p className="text-xs text-muted-foreground mb-3">{card.furniture}</p>
-                    <div className="text-xl font-extrabold mb-4 mt-auto text-primary">{card.price}</div>
-                    <button className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 text-sm">
-                      Заказать
+
+                  <div className="px-6 pb-6 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-base mb-1" style={{ color: "#1C1C1C" }}>{card.title}</h3>
+                    <p className="text-[13px] mb-2" style={{ color: "#7A7268" }}>Размер: {card.size}</p>
+                    <div className="text-[13px] leading-relaxed mb-3" style={{ color: "#7A7268" }}>
+                      <p>Тип: {card.opening}</p>
+                      <p>Стеклопакет: {card.glass}</p>
+                      <p>Фурнитура: {card.furniture}</p>
+                    </div>
+
+                    <div
+                      className="inline-block font-bold text-lg rounded-lg px-4 py-2 mb-4 mt-auto self-start"
+                      style={{ backgroundColor: "#FDF3EC", color: "#C8441A" }}
+                    >
+                      {card.price}
+                    </div>
+
+                    <button
+                      className="w-full py-3 rounded-lg font-semibold text-sm text-white transition-colors duration-200"
+                      style={{ backgroundColor: "#C8441A" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+                    >
+                      Заказать замер
                     </button>
                   </div>
                 </div>
               </AnimatedSection>
             ))}
+          </div>
+
+          {/* Note */}
+          <p className="text-xs mt-6" style={{ color: "#7A7268" }}>
+            * Цены указаны ориентировочно для стандартных размеров. Точная стоимость рассчитывается после бесплатного замера.
+          </p>
+
+          {/* CTA strip */}
+          <div
+            className="mt-8 rounded-xl px-6 sm:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4"
+            style={{ backgroundColor: "#FDF3EC" }}
+          >
+            <p className="font-semibold text-sm sm:text-base" style={{ color: "#1C1C1C" }}>
+              Не нашли нужный размер? Получите точный расчёт бесплатно
+            </p>
+            <button
+              className="px-6 py-3 rounded-lg font-semibold text-sm text-white whitespace-nowrap flex items-center gap-2 transition-colors duration-200"
+              style={{ backgroundColor: "#C8441A" }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+            >
+              Заказать замер <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
