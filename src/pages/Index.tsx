@@ -407,35 +407,12 @@ const Index = () => {
           <AnimatedSection>
             <SectionLabel>Цены</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
-            <p className="text-muted-foreground text-body mb-8 max-w-xl">Стоимость окон ПВХ с монтажом. Выберите профильную систему для просмотра цен.</p>
-          </AnimatedSection>
-
-          {/* Profile selector */}
-          <AnimatedSection delay={0.1}>
-            <div className="mb-10">
-              <p className="text-sm font-semibold text-foreground mb-3">Выберите профильную систему:</p>
-              <div className="flex flex-wrap gap-2">
-                {profileSystems.map((p) => (
-                  <button
-                    key={p.id}
-                    onClick={() => setSelectedProfile(p.id)}
-                    className="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 border"
-                    style={{
-                      backgroundColor: selectedProfile === p.id ? "hsl(var(--primary))" : "white",
-                      color: selectedProfile === p.id ? "white" : "#1C1C1C",
-                      borderColor: selectedProfile === p.id ? "hsl(var(--primary))" : "#E2DDD5",
-                    }}
-                  >
-                    {p.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с монтажом для профиля Novotex Techno 58.</p>
           </AnimatedSection>
 
           {/* Cards grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {currentPricing.map((card, i) => (
+            {pricingByProfile.novotex58.map((card, i) => (
               <AnimatedSection key={`${selectedProfile}-${card.type}`} delay={i * 0.08}>
                 <div
                   className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg"
