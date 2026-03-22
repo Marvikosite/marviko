@@ -213,9 +213,8 @@ const Index = () => {
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [certModal, setCertModal] = useState<string | null>(null);
-  const [selectedProfile, setSelectedProfile] = useState("novotex58");
 
-  const currentPricing = pricingByProfile[selectedProfile];
+
 
   return (
     <div className="min-h-screen bg-background">
