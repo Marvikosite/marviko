@@ -162,7 +162,7 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
       <SkyDefs id="t" glassY={16} glassH={128} />
       <rect x="10" y="10" width="200" height="140" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
       <rect x="16" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
-      <CityLine y={144} width={58} xOffset={16} />
+      
       <rect x="80" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
       <CityLine y={144} width={58} xOffset={80} />
       <rect x="144" y="16" width="58" height="128" rx="1" fill={`url(#sky-t)`} stroke={frame} strokeWidth={sw} />
