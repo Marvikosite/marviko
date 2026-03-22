@@ -181,7 +181,7 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
       
       <rect x="80" y="10" width="90" height="160" rx="2" fill="#FFFFFF" stroke={frameOuter} strokeWidth={sw + 0.5} />
       <rect x="86" y="16" width="78" height="92" rx="1" fill={`url(#sky-b)`} stroke={frame} strokeWidth={sw} />
-      <CityLine y={108} width={78} xOffset={86} />
+      
       <rect x="86" y="114" width="78" height="50" rx="1" fill="rgba(189,186,180,0.15)" stroke={frame} strokeWidth={sw} />
       <line x1="93" y1="90" x2="93" y2="106" stroke={frame} strokeWidth={2} strokeLinecap="round" />
     </svg>
