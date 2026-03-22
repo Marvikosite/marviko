@@ -77,12 +77,6 @@ const faqData = [
   { q: "Ваша специализация — исключительно пластиковые окна?", a: "Нет, мы готовы предложить своим клиентам широкий спектр услуг. Мы устанавливаем пластиковые окна и балконные двери, предлагаем зонирование пространства с помощью межкомнатных перегородок. Также мы выполняем работы по утеплению и отделке балконов. В качестве дополнения вы можете выбрать стильные откосы, ламинацию оконного профиля, необычный подоконник — эти детали помогут органично вписать окна в любой интерьер. Рулонные шторы или жалюзи помогут укрыться от яркого солнца, а москитная сетка — от докучливых насекомых." },
 ];
 
-const profileSystems = [
-  { id: "novotex58", label: "Novotex Techno 58" },
-  { id: "novotex70", label: "Novotex Techno 70" },
-  { id: "grunhaus70", label: "Grunhaus 70" },
-  { id: "rehau70", label: "Rehau Grazio 70" },
-];
 
 const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | "balcony"; title: string; size: string; opening: string; glass: string; furniture: string; price: string; featured: boolean }[]> = {
   novotex58: [
