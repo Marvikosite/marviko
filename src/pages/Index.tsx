@@ -130,23 +130,6 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
     </defs>
   );
 
-  const CityLine = ({ y, width: w, xOffset = 0 }: { y: number; width: number; xOffset?: number }) => {
-    const buildings = [
-      { x: 0, w: 8, h: 18 }, { x: 10, w: 6, h: 12 }, { x: 18, w: 10, h: 22 },
-      { x: 30, w: 7, h: 14 }, { x: 39, w: 12, h: 26 }, { x: 53, w: 6, h: 10 },
-      { x: 61, w: 9, h: 20 }, { x: 72, w: 8, h: 15 }, { x: 82, w: 11, h: 24 },
-      { x: 95, w: 7, h: 13 }, { x: 104, w: 10, h: 19 }, { x: 116, w: 8, h: 16 },
-      { x: 126, w: 12, h: 22 }, { x: 140, w: 6, h: 11 }, { x: 148, w: 9, h: 17 },
-    ];
-    const scale = w / 120;
-    return (
-      <g>
-        {buildings.map((b, i) => (
-          <rect key={i} x={xOffset + b.x * scale} y={y - b.h * scale} width={b.w * scale} height={b.h * scale} fill="rgba(60,80,100,0.25)" />
-        ))}
-      </g>
-    );
-  };
 
   if (type === "single") return (
     <svg width="140" height="180" viewBox="0 0 120 180">
