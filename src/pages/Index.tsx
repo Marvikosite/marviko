@@ -150,7 +150,7 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
       <rect x="16" y="16" width="71" height="128" rx="1" fill={`url(#sky-d)`} stroke={frame} strokeWidth={sw} />
       
       <rect x="93" y="16" width="71" height="128" rx="1" fill={`url(#sky-d)`} stroke={frame} strokeWidth={sw} />
-      <CityLine y={144} width={71} xOffset={93} />
+      
       <line x1="100" y1="72" x2="100" y2="88" stroke={frame} strokeWidth={2} strokeLinecap="round" />
       <path d="M128,130 L128,22 M124,28 L128,18 L132,28" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
       <path d="M99,80 L158,80 M152,76 L162,80 L152,84" stroke={frame} strokeWidth={1} fill="none" strokeLinecap="round" />
