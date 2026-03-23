@@ -132,8 +132,8 @@ const WindowsillsPage = () => {
               </AnimatedSection>
             ))}
             {/* Catalog spans 2 columns */}
-            <AnimatedSection delay={0.5}>
-              <div className="sm:col-span-2 lg:col-span-2">
+            <AnimatedSection delay={0.5} className="sm:col-span-2 lg:col-span-2">
+              <div>
                 <img
                   src={windowsillCatalog}
                   alt="Каталог цветов Crystallit Premium"
