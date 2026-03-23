@@ -382,7 +382,7 @@ const Index = () => {
       </section>
 
       {/* Pricing - mosokna style clean cards */}
-      <section className="py-20 bg-background">
+      <section id="pricing" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <SectionLabel>Цены</SectionLabel>
