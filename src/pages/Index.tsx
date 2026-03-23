@@ -401,7 +401,6 @@ const Index = () => {
                   onMouseLeave={(e) => (e.currentTarget.style.borderColor = "transparent")}
                   onClick={() => setOrderModal(true)}
                 >
-                >
                   {/* SVG Window illustration */}
                   <div className="flex items-center justify-center py-6 px-4">
                     <PricingWindowSVG type={card.type} />
