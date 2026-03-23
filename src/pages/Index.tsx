@@ -451,6 +451,7 @@ const Index = () => {
               style={{ backgroundColor: "#C8441A" }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+              onClick={() => setOrderModal(true)}
             >
               Заказать замер <ArrowRight className="w-4 h-4" />
             </button>
