@@ -767,6 +767,74 @@ const Index = () => {
       </section>
 
       <Footer />
+
+      {/* Order Modal */}
+      <AnimatePresence>
+        {orderModal && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="absolute inset-0 bg-black/60" onClick={() => setOrderModal(false)} />
+            <motion.div
+              className="relative bg-card rounded-xl p-6 sm:p-8 w-full max-w-md shadow-2xl border border-border"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+            >
+              <button
+                onClick={() => setOrderModal(false)}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-2xl leading-none"
+              >
+                ×
+              </button>
+              <h3 className="text-xl font-bold mb-2 text-foreground">Заказать звонок</h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.
+              </p>
+              <div className="flex flex-col gap-4">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="* Ваше имя"
+                    value={orderForm.name}
+                    onChange={(e) => setOrderForm({ ...orderForm, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="tel"
+                    placeholder="* Телефон"
+                    value={orderForm.phone}
+                    onChange={(e) => setOrderForm({ ...orderForm, phone: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    alert("Спасибо! Мы перезвоним вам в ближайшее время.");
+                    setOrderModal(false);
+                    setOrderForm({ name: "", phone: "" });
+                  }}
+                  className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200"
+                  style={{ backgroundColor: "#C8441A" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+                >
+                  Заказать звонок
+                </button>
+              </div>
+              <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                Или обратитесь к нам по телефону: <a href="tel:+375295677756" className="text-primary font-medium">+375 29 567-77-56</a>
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
