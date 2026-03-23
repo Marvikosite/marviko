@@ -58,14 +58,14 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-4">Контакты</h4>
             <div className="flex flex-col gap-3">
-              <a href="tel:+375295677756" className="flex items-center gap-2.5 text-sm text-primary">
+              <a href="tel:+375295677756" className="flex items-center gap-2.5 text-sm text-primary hover:text-white transition-colors">
                 <Phone className="w-4 h-4" />
                 +375 (29) 567-77-56
               </a>
               <p className="text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
                 Viber / Telegram: +375 (29) 567-77-56
               </p>
-              <a href="https://www.instagram.com/okna_dveri_marviko" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:underline">
+              <a href="https://www.instagram.com/okna_dveri_marviko" target="_blank" rel="noopener noreferrer" className="text-sm text-primary hover:text-white transition-colors">
                 @okna_dveri_marviko
               </a>
               <div className="flex items-start gap-2.5 text-sm" style={{ color: "hsl(var(--muted-foreground))" }}>
