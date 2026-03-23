@@ -193,11 +193,13 @@ const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
   const [contactForm, setContactForm] = useState({ name: "", phone: "", message: "" });
+  const [contactErrors, setContactErrors] = useState({ name: false, phone: false });
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [certModal, setCertModal] = useState<string | null>(null);
   const [orderModal, setOrderModal] = useState(false);
   const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
+  const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
 
 
 
@@ -380,7 +382,7 @@ const Index = () => {
       </section>
 
       {/* Pricing - mosokna style clean cards */}
-      <section className="py-20 bg-background">
+      <section id="pricing" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <SectionLabel>Цены</SectionLabel>
@@ -393,8 +395,10 @@ const Index = () => {
             {pricingByProfile.novotex58.map((card, i) => (
               <AnimatedSection key={card.type} delay={i * 0.08}>
                 <div
-                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg cursor-pointer h-full"
-                  style={{ border: "1px solid #E2DDD5" }}
+                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 cursor-pointer h-full hover:shadow-lg"
+                  style={{ border: "2px solid transparent" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#C8441A")}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "transparent")}
                   onClick={() => setOrderModal(true)}
                 >
                   {/* SVG Window illustration */}
@@ -579,7 +583,7 @@ const Index = () => {
       </section>
 
       {/* Certificates - subtle section */}
-      <section className="py-12 bg-background border-t border-border">
+      <section id="certificates" className="py-12 bg-background border-t border-border">
         <div className="container mx-auto section-padding">
           <AnimatedSection>
             <div className="flex items-center gap-3 mb-6">
@@ -696,10 +700,11 @@ const Index = () => {
                         type="text"
                         placeholder="Иван Иванов"
                         value={contactForm.name}
-                        onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors"
+                        onChange={(e) => { setContactForm({ ...contactForm, name: e.target.value }); setContactErrors({ ...contactErrors, name: false }); }}
+                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
                         maxLength={100}
                       />
+                      {contactErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
                     </div>
                     <div>
                       <label className="text-sm font-medium mb-1.5 block">Телефон</label>
@@ -707,10 +712,11 @@ const Index = () => {
                         type="tel"
                         placeholder="+375 29 XXX-XX-XX"
                         value={contactForm.phone}
-                        onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors"
+                        onChange={(e) => { setContactForm({ ...contactForm, phone: e.target.value }); setContactErrors({ ...contactErrors, phone: false }); }}
+                        className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors ${contactErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
                         maxLength={20}
                       />
+                      {contactErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
                     </div>
                     <div>
                       <label className="text-sm font-medium mb-1.5 block">Сообщение</label>
@@ -723,7 +729,16 @@ const Index = () => {
                         maxLength={1000}
                       />
                     </div>
-                    <button className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2">
+                    <button
+                      onClick={() => {
+                        const errors = { name: !contactForm.name.trim(), phone: !contactForm.phone.trim() };
+                        setContactErrors(errors);
+                        if (errors.name || errors.phone) return;
+                        alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
+                        setContactForm({ name: "", phone: "", message: "" });
+                      }}
+                      className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2"
+                    >
                       <Send className="w-4 h-4" />
                       Отправить сообщение
                     </button>
@@ -801,24 +816,30 @@ const Index = () => {
                     type="text"
                     placeholder="* Ваше имя"
                     value={orderForm.name}
-                    onChange={(e) => setOrderForm({ ...orderForm, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                    onChange={(e) => { setOrderForm({ ...orderForm, name: e.target.value }); setOrderErrors({ ...orderErrors, name: false }); }}
+                    className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.name ? 'border-destructive' : 'border-border focus:border-primary'}`}
                   />
+                  {orderErrors.name && <p className="text-xs text-destructive mt-1">Пожалуйста, введите ваше имя</p>}
                 </div>
                 <div>
                   <input
                     type="tel"
                     placeholder="* Телефон"
                     value={orderForm.phone}
-                    onChange={(e) => setOrderForm({ ...orderForm, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                    onChange={(e) => { setOrderForm({ ...orderForm, phone: e.target.value }); setOrderErrors({ ...orderErrors, phone: false }); }}
+                    className={`w-full px-4 py-3 rounded-lg bg-background text-sm border focus:outline-none transition-colors placeholder:text-muted-foreground ${orderErrors.phone ? 'border-destructive' : 'border-border focus:border-primary'}`}
                   />
+                  {orderErrors.phone && <p className="text-xs text-destructive mt-1">Пожалуйста, введите номер телефона</p>}
                 </div>
                 <button
                   onClick={() => {
+                    const errors = { name: !orderForm.name.trim(), phone: !orderForm.phone.trim() };
+                    setOrderErrors(errors);
+                    if (errors.name || errors.phone) return;
                     alert("Спасибо! Мы перезвоним вам в ближайшее время.");
                     setOrderModal(false);
                     setOrderForm({ name: "", phone: "" });
+                    setOrderErrors({ name: false, phone: false });
                   }}
                   className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200"
                   style={{ backgroundColor: "#C8441A" }}
