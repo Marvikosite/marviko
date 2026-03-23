@@ -395,9 +395,12 @@ const Index = () => {
             {pricingByProfile.novotex58.map((card, i) => (
               <AnimatedSection key={card.type} delay={i * 0.08}>
                 <div
-                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg cursor-pointer h-full"
-                  style={{ border: "1px solid #E2DDD5" }}
+                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 cursor-pointer h-full hover:shadow-lg"
+                  style={{ border: "2px solid transparent" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#C8441A")}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "transparent")}
                   onClick={() => setOrderModal(true)}
+                >
                 >
                   {/* SVG Window illustration */}
                   <div className="flex items-center justify-center py-6 px-4">
