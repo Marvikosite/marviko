@@ -193,11 +193,13 @@ const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
   const [contactForm, setContactForm] = useState({ name: "", phone: "", message: "" });
+  const [contactErrors, setContactErrors] = useState({ name: false, phone: false });
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [certModal, setCertModal] = useState<string | null>(null);
   const [orderModal, setOrderModal] = useState(false);
   const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
+  const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
 
 
 
