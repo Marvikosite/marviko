@@ -322,8 +322,12 @@ const Index = () => {
                     if (!showCalcPhone) {
                       setShowCalcPhone(true);
                     } else {
-                      // Submit form
-                      alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
+                      sendFormEmail("Расчёт стоимости — сайт Марвико", {
+                        "Тип": formData.type,
+                        "Ширина": formData.width || "не указана",
+                        "Высота": formData.height || "не указана",
+                        "Телефон": calcPhone,
+                      });
                       setShowCalcPhone(false);
                       setCalcPhone("");
                       setFormData({ type: "windows", width: "", height: "" });
