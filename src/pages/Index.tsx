@@ -188,24 +188,39 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
   );
 };
 
-const Index = () => {
+const sendFormEmail = async (subject: string, data: Record<string, string>) => {
+  try {
+    const body = Object.entries(data).map(([k, v]) => `${k}: ${v}`).join('\n');
+    const mailtoLink = `mailto:vladdani777@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(mailtoLink, '_blank');
+    return true;
+  } catch {
+    return false;
+  }
+};
 
+const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({ type: "windows", width: "", height: "" });
-  const [contactForm, setContactForm] = useState({ name: "", phone: "", message: "" });
-  const [contactErrors, setContactErrors] = useState({ name: false, phone: false });
+  const [contactForm, setContactForm] = useState({ name: "", phone: "", question: "" });
+  const [contactErrors, setContactErrors] = useState({ name: false, phone: false, question: false });
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [certModal, setCertModal] = useState<string | null>(null);
+  const [certIndex, setCertIndex] = useState(0);
   const [orderModal, setOrderModal] = useState(false);
   const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
   const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
+  const [formSubmitted, setFormSubmitted] = useState({ contact: false, order: false });
 
-
+  const certImages = [
+    { img: certSpk1, title: "Свидетельство о технической компетентности" },
+    { img: certSpk2, title: "Область технической компетентности" },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar onOrderClick={() => setOrderModal(true)} />
 
       {/* Hero - lighter warm feel */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">
