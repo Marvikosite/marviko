@@ -196,6 +196,8 @@ const Index = () => {
   const [showCalcPhone, setShowCalcPhone] = useState(false);
   const [calcPhone, setCalcPhone] = useState("");
   const [certModal, setCertModal] = useState<string | null>(null);
+  const [orderModal, setOrderModal] = useState(false);
+  const [orderForm, setOrderForm] = useState({ name: "", phone: "" });
 
 
 
@@ -364,7 +366,7 @@ const Index = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyUs.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.1}>
-                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary">
+                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary h-full flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary mb-4">
                     {item.icon}
                   </div>
@@ -391,18 +393,10 @@ const Index = () => {
             {pricingByProfile.novotex58.map((card, i) => (
               <AnimatedSection key={card.type} delay={i * 0.08}>
                 <div
-                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg"
-                  style={{ border: card.featured ? "2px solid hsl(var(--primary))" : "1px solid #E2DDD5" }}
+                  className="rounded-xl flex flex-col bg-card relative transition-all duration-300 hover:shadow-lg cursor-pointer h-full"
+                  style={{ border: "1px solid #E2DDD5" }}
+                  onClick={() => setOrderModal(true)}
                 >
-                  {card.featured && (
-                    <div
-                      className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-3 py-1 rounded-full z-10"
-                      style={{ backgroundColor: "hsl(var(--primary))", color: "white" }}
-                    >
-                      Популярный
-                    </div>
-                  )}
-
                   {/* SVG Window illustration */}
                   <div className="flex items-center justify-center py-6 px-4">
                     <PricingWindowSVG type={card.type} />
@@ -429,6 +423,7 @@ const Index = () => {
                       style={{ backgroundColor: "#C8441A" }}
                       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
                       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+                      onClick={(e) => { e.stopPropagation(); setOrderModal(true); }}
                     >
                       Заказать замер
                     </button>
@@ -456,6 +451,7 @@ const Index = () => {
               style={{ backgroundColor: "#C8441A" }}
               onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
               onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+              onClick={() => setOrderModal(true)}
             >
               Заказать замер <ArrowRight className="w-4 h-4" />
             </button>
@@ -542,10 +538,6 @@ const Index = () => {
               <AnimatedSection key={i} delay={i * 0.08}>
                 <div className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]">
                   <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: "rgba(217,79,30,0.70)" }}>
-                    <Eye className="w-8 h-8 text-primary-foreground mb-2" />
-                    <span className="text-primary-foreground text-sm font-semibold text-center px-3">{item.title}</span>
-                  </div>
                 </div>
               </AnimatedSection>
             ))}
@@ -776,6 +768,74 @@ const Index = () => {
       </section>
 
       <Footer />
+
+      {/* Order Modal */}
+      <AnimatePresence>
+        {orderModal && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="absolute inset-0 bg-black/60" onClick={() => setOrderModal(false)} />
+            <motion.div
+              className="relative bg-card rounded-xl p-6 sm:p-8 w-full max-w-md shadow-2xl border border-border"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+            >
+              <button
+                onClick={() => setOrderModal(false)}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-2xl leading-none"
+              >
+                ×
+              </button>
+              <h3 className="text-xl font-bold mb-2 text-foreground">Заказать звонок</h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Нет времени или возможности позвонить? Оставьте свой номер телефона и наш менеджер свяжется с вами в течение 15 минут.
+              </p>
+              <div className="flex flex-col gap-4">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="* Ваше имя"
+                    value={orderForm.name}
+                    onChange={(e) => setOrderForm({ ...orderForm, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="tel"
+                    placeholder="* Телефон"
+                    value={orderForm.phone}
+                    onChange={(e) => setOrderForm({ ...orderForm, phone: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-background text-sm border border-border focus:border-primary focus:outline-none transition-colors placeholder:text-muted-foreground"
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    alert("Спасибо! Мы перезвоним вам в ближайшее время.");
+                    setOrderModal(false);
+                    setOrderForm({ name: "", phone: "" });
+                  }}
+                  className="w-full py-3.5 rounded-lg font-semibold text-white transition-colors duration-200"
+                  style={{ backgroundColor: "#C8441A" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#A33515")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C8441A")}
+                >
+                  Заказать звонок
+                </button>
+              </div>
+              <p className="text-xs text-muted-foreground mt-4 flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                Или обратитесь к нам по телефону: <a href="tel:+375295677756" className="text-primary font-medium">+375 29 567-77-56</a>
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
