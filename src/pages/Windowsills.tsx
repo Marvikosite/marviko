@@ -141,7 +141,7 @@ const WindowsillsPage = () => {
               <div>
                 <img
                   src={windowsillCatalog}
-                  alt="Каталог цветов Crystallit Premium"
+                  alt="Каталог цветов премиум подоконников"
                   className="w-full rounded-xl object-cover"
                   style={{ aspectRatio: "16/9" }}
                 />
