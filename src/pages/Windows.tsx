@@ -6,6 +6,22 @@ import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import WindowDrawing from "@/components/WindowDrawing";
 
+import windowWork1 from "@/assets/window-work-1.jpg";
+import windowWork2 from "@/assets/window-work-2.jpg";
+import windowWork3 from "@/assets/window-work-3.jpg";
+import windowWork4 from "@/assets/window-work-4.jpg";
+import windowWork5 from "@/assets/window-work-5.jpg";
+import windowWork6 from "@/assets/window-work-6.jpg";
+
+const workPhotos = [
+  { img: windowWork1, title: "Установка окон в частном доме" },
+  { img: windowWork2, title: "Окна в цветном профиле" },
+  { img: windowWork3, title: "Остекление магазина" },
+  { img: windowWork4, title: "Остекление многоквартирного дома" },
+  { img: windowWork5, title: "Подоконник с окном" },
+  { img: windowWork6, title: "Глянцевый подоконник" },
+];
+
 const profiles = [
   {
     chambers: "4 камеры",
@@ -197,6 +213,25 @@ const WindowsPage = () => {
                     <p className="text-sm text-muted-foreground text-body">{item.desc}</p>
                   </div>
                 </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Work examples */}
+      <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
+        <div className="container mx-auto section-padding">
+          <AnimatedSection>
+            <SectionLabel>Портфолио</SectionLabel>
+            <h2 className="text-3xl sm:text-4xl text-display mb-10">Примеры работ</h2>
+          </AnimatedSection>
+          <div className="columns-2 lg:columns-3 gap-6 space-y-6">
+            {workPhotos.map((photo, i) => (
+              <AnimatedSection key={i} delay={i * 0.08}>
+                <div className="break-inside-avoid rounded-xl overflow-hidden card-shadow">
+                  <img src={photo.img} alt={photo.title} className="w-full h-auto" />
+                </div>
               </AnimatedSection>
             ))}
           </div>
