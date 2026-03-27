@@ -137,12 +137,12 @@ const pricingByProfile: Record<string, { type: "single" | "double" | "triple" | 
 };
 
 const portfolioItems = [
-  { img: workWindowOpen, title: "Установка окон в загородном доме" },
-  { img: workWindowTrees, title: "Окна с видом на сад" },
+  { img: workShopWindows, title: "Остекление коммерческого объекта" },
+  { img: workFireplaceDoor, title: "Окна в интерьере с камином" },
   { img: workHouseExterior, title: "Остекление частного дома" },
-  { img: workDoorBrown, title: "Входная дверь ПВХ" },
-  { img: workDoorGlass, title: "Дверь со стеклопакетом" },
-  { img: workWindowFireplace, title: "Окна в интерьере" },
+  { img: workDoorBlinds, title: "Дверь ПВХ со встроенными жалюзи" },
+  { img: workShopDoor, title: "Входная группа магазина" },
+  { img: workWindowsillGreen, title: "Подоконник с видом на природу" },
 ];
 
 const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
