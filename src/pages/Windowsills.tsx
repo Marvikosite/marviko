@@ -6,21 +6,25 @@ import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
 
-import windowsillWood from "@/assets/windowsill-wood.jpg";
-import windowsillWenge from "@/assets/windowsill-wenge.jpg";
-import windowsillOrange from "@/assets/windowsill-orange.jpg";
-import windowsillBeige from "@/assets/windowsill-beige.jpg";
-import windowsillGreen from "@/assets/windowsill-green.jpg";
-import windowsillMarble from "@/assets/windowsill-marble.jpg";
-import windowsillCatalog from "@/assets/windowsill-catalog.jpg";
+import windowsillReal1 from "@/assets/windowsill-real-1.jpg";
+import windowsillReal2 from "@/assets/windowsill-real-2.jpg";
+import windowsillReal3 from "@/assets/windowsill-real-3.jpg";
+import windowsillReal4 from "@/assets/windowsill-real-4.jpg";
+import windowsillReal5 from "@/assets/windowsill-real-5.jpg";
+import windowsillReal6 from "@/assets/windowsill-real-6.jpg";
+import windowsillReal7 from "@/assets/windowsill-real-7.jpg";
+import windowsillReal8 from "@/assets/windowsill-real-8.jpg";
+import windowsillCatalog from "@/assets/windowsill-real-catalog.jpg";
 
 const galleryItems = [
-  { img: windowsillWood, caption: "Подоконник под дерево — тёплый интерьер" },
-  { img: windowsillWenge, caption: "Премиум подоконник венге" },
-  { img: windowsillOrange, caption: "Яркий цветной подоконник" },
-  { img: windowsillBeige, caption: "Светлый подоконник у балконной двери" },
-  { img: windowsillGreen, caption: "Подоконник салатовый глянец" },
-  { img: windowsillMarble, caption: "Подоконник под мрамор премиум" },
+  { img: windowsillReal1, caption: "Глянцевый подоконник под дерево" },
+  { img: windowsillReal2, caption: "Подоконник под мрамор с цветком" },
+  { img: windowsillReal3, caption: "Подоконник салатовый глянец" },
+  { img: windowsillReal4, caption: "Сиреневый глянцевый подоконник" },
+  { img: windowsillReal5, caption: "Подоконник под белый мрамор" },
+  { img: windowsillReal6, caption: "Подоконник в цвет интерьера" },
+  { img: windowsillReal7, caption: "Подоконник венге премиум" },
+  { img: windowsillReal8, caption: "Яркий оранжевый подоконник" },
 ];
 
 const sendFormEmail = async (subject: string, data: Record<string, string>) => {
@@ -92,10 +96,11 @@ const WindowsillsPage = () => {
                 <span className="inline-block text-xs font-bold px-3 py-1 rounded-full mb-4 text-white" style={{ backgroundColor: "#C8441A" }}>
                   Премиум
                 </span>
-                <h3 className="text-xl font-bold mb-2">Премиум (Crystallit)</h3>
-                <p className="text-sm text-muted-foreground text-body mb-6">
+                <h3 className="text-xl font-bold mb-2">Премиум</h3>
+                <p className="text-sm text-muted-foreground text-body mb-4">
                   Утолщённые стенки, дополнительные рёбра жёсткости. Защита от бытовой химии. Имитация камня, дерева, глянец, матовые фактуры
                 </p>
+                <p className="text-sm font-semibold mb-4">Бренды: Кристаллит, Эстера, VPL, ПДК-дизайн</p>
                 <ul className="flex flex-col gap-2.5">
                   {["Более 30 цветов и фактур", "Глянцевые и матовые", "Имитация камня и дерева", "Устойчивы к химии", "Долговечны"].map((f) => (
                     <li key={f} className="flex items-center gap-2 text-sm">
@@ -136,11 +141,11 @@ const WindowsillsPage = () => {
               <div>
                 <img
                   src={windowsillCatalog}
-                  alt="Каталог цветов Crystallit Premium"
+                  alt="Каталог цветов премиум подоконников"
                   className="w-full rounded-xl object-cover"
                   style={{ aspectRatio: "16/9" }}
                 />
-                <p className="text-[13px] text-muted-foreground mt-2">Каталог цветов Crystallit Premium</p>
+                <p className="text-[13px] text-muted-foreground mt-2">Каталог цветов премиум подоконников</p>
               </div>
             </AnimatedSection>
           </div>
