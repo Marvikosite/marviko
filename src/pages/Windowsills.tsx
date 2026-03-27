@@ -96,10 +96,11 @@ const WindowsillsPage = () => {
                 <span className="inline-block text-xs font-bold px-3 py-1 rounded-full mb-4 text-white" style={{ backgroundColor: "#C8441A" }}>
                   Премиум
                 </span>
-                <h3 className="text-xl font-bold mb-2">Премиум (Crystallit)</h3>
-                <p className="text-sm text-muted-foreground text-body mb-6">
+                <h3 className="text-xl font-bold mb-2">Премиум</h3>
+                <p className="text-sm text-muted-foreground text-body mb-4">
                   Утолщённые стенки, дополнительные рёбра жёсткости. Защита от бытовой химии. Имитация камня, дерева, глянец, матовые фактуры
                 </p>
+                <p className="text-sm font-semibold mb-4">Бренды: Кристаллит, Эстера, VPL, ПДК-дизайн</p>
                 <ul className="flex flex-col gap-2.5">
                   {["Более 30 цветов и фактур", "Глянцевые и матовые", "Имитация камня и дерева", "Устойчивы к химии", "Долговечны"].map((f) => (
                     <li key={f} className="flex items-center gap-2 text-sm">
