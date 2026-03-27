@@ -83,16 +83,15 @@ const PartitionsPage = () => {
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Пример выполненной работы</h2>
           </AnimatedSection>
           <AnimatedSection delay={0.15}>
-            <div className="max-w-[900px] mx-auto">
-              <img
-                src={partitionsOffice}
-                alt="Офисные перегородки из ПВХ"
-                className="w-full rounded-2xl object-cover"
-                style={{ aspectRatio: "16/9" }}
-              />
-              <p className="text-sm text-muted-foreground text-center mt-4">
-                Офисные перегородки из ПВХ — зонирование помещения с дверным блоком
-              </p>
+            <div className="grid sm:grid-cols-2 gap-6 max-w-[1000px] mx-auto">
+              <div>
+                <img src={partitionsOffice} alt="Офисные перегородки из ПВХ" className="w-full rounded-xl object-cover aspect-[4/3]" />
+                <p className="text-sm text-muted-foreground text-center mt-3">Зонирование помещения с дверным блоком</p>
+              </div>
+              <div>
+                <img src={partitionsReal1} alt="Перегородки ПВХ в офисе" className="w-full rounded-xl object-cover aspect-[4/3]" />
+                <p className="text-sm text-muted-foreground text-center mt-3">Офисные перегородки с дверью</p>
+              </div>
             </div>
           </AnimatedSection>
         </div>
