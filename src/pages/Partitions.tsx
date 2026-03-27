@@ -6,6 +6,7 @@ import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion, AnimatePresence } from "framer-motion";
 import partitionsOffice from "@/assets/partitions-office.jpg";
+import partitionsReal1 from "@/assets/partitions-real-1.jpg";
 
 const objects = [
   { icon: <School className="w-7 h-7" />, title: "Школы и детские сады", desc: "Безопасные и прочные конструкции, соответствующие требованиям учебных учреждений" },
