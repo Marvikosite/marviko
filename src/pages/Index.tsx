@@ -508,25 +508,57 @@ const Index = () => {
               </div>
             </div>
             <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6 border border-primary-foreground/20">
-              <div className="flex flex-col gap-4">
-                <input
-                  type="text"
-                  placeholder="Ваше имя"
-                  className="w-full px-4 py-3 rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border border-primary-foreground/20 focus:border-primary-foreground/50 focus:outline-none"
-                />
-                <input
-                  type="tel"
-                  placeholder="+375 29 XXX-XX-XX"
-                  className="w-full px-4 py-3 rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border border-primary-foreground/20 focus:border-primary-foreground/50 focus:outline-none"
-                />
-                <button
-                  onClick={() => setOrderModal(true)}
-                  className="w-full bg-primary-foreground text-primary py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2"
-                >
-                  <Phone className="w-4 h-4" />
-                  Заказать звонок
-                </button>
-              </div>
+              {ctaSubmitted ? (
+                <div className="text-center py-4">
+                  <div className="w-16 h-16 rounded-full bg-primary-foreground/20 flex items-center justify-center mx-auto mb-4">
+                    <Send className="w-7 h-7 text-primary-foreground" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-primary-foreground">Заявка отправлена!</h3>
+                  <p className="text-sm text-primary-foreground/80 mb-4">Наш менеджер свяжется с вами в течение 15 минут.</p>
+                  <button onClick={() => setCtaSubmitted(false)} className="px-6 py-2.5 rounded-lg font-semibold text-sm border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 transition-colors">Закрыть</button>
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Ваше имя"
+                      value={ctaForm.name}
+                      onChange={(e) => { setCtaForm({ ...ctaForm, name: e.target.value }); setCtaErrors({ ...ctaErrors, name: false }); }}
+                      className={`w-full px-4 py-3 rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border focus:outline-none ${ctaErrors.name ? 'border-red-400' : 'border-primary-foreground/20 focus:border-primary-foreground/50'}`}
+                      disabled={ctaSending}
+                    />
+                    {ctaErrors.name && <p className="text-xs text-red-300 mt-1">Пожалуйста, введите ваше имя</p>}
+                  </div>
+                  <div>
+                    <input
+                      type="tel"
+                      placeholder="+375 29 XXX-XX-XX"
+                      value={ctaForm.phone}
+                      onChange={(e) => { setCtaForm({ ...ctaForm, phone: e.target.value }); setCtaErrors({ ...ctaErrors, phone: false }); }}
+                      className={`w-full px-4 py-3 rounded-lg bg-primary-foreground/10 text-primary-foreground text-sm placeholder:text-primary-foreground/50 border focus:outline-none ${ctaErrors.phone ? 'border-red-400' : 'border-primary-foreground/20 focus:border-primary-foreground/50'}`}
+                      disabled={ctaSending}
+                    />
+                    {ctaErrors.phone && <p className="text-xs text-red-300 mt-1">Пожалуйста, введите номер телефона</p>}
+                  </div>
+                  <button
+                    disabled={ctaSending}
+                    onClick={async () => {
+                      const errors = { name: !ctaForm.name.trim(), phone: !ctaForm.phone.trim() };
+                      setCtaErrors(errors);
+                      if (errors.name || errors.phone) return;
+                      setCtaSending(true);
+                      await sendFormEmail("Консультация с сайта Марвико", { "Имя": ctaForm.name, "Телефон": ctaForm.phone });
+                      setCtaSending(false);
+                      setCtaSubmitted(true);
+                      setCtaForm({ name: "", phone: "" });
+                    }}
+                    className="w-full bg-primary-foreground text-primary py-3.5 rounded-lg font-semibold hover:opacity-90 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70"
+                  >
+                    {ctaSending ? (<><svg className="animate-spin w-5 h-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" className="opacity-25" /><path d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="opacity-75" /></svg>Отправка...</>) : (<><Phone className="w-4 h-4" />Заказать звонок</>)}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
