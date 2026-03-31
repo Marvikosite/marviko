@@ -136,13 +136,13 @@ const WindowsillsPage = () => {
                 </div>
               </AnimatedSection>
             ))}
-            {/* Catalog spans full width */}
-            <AnimatedSection delay={0.5} className="col-span-2 lg:col-span-3">
+            {/* Catalog as regular grid item */}
+            <AnimatedSection delay={0.5}>
               <div
-                className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[21/9]"
+                className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
                 onClick={() => setLightbox(galleryItems.length)}
               >
-                <img src={windowsillCatalog} alt="Каталог цветов премиум подоконников" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={windowsillCatalog} alt="Каталог цветов премиум подоконников" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
               </div>
             </AnimatedSection>
