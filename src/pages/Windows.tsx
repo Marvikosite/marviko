@@ -1,5 +1,7 @@
-import { Check } from "lucide-react";
+import { useState } from "react";
+import { Check, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
@@ -66,6 +68,8 @@ const accessories = [
 ];
 
 const WindowsPage = () => {
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -226,11 +230,15 @@ const WindowsPage = () => {
             <SectionLabel>Портфолио</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Примеры работ</h2>
           </AnimatedSection>
-          <div className="columns-2 lg:columns-3 gap-6 space-y-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {workPhotos.map((photo, i) => (
               <AnimatedSection key={i} delay={i * 0.08}>
-                <div className="break-inside-avoid rounded-xl overflow-hidden card-shadow">
-                  <img src={photo.img} alt={photo.title} className="w-full h-auto" />
+                <div
+                  className="rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
+                  onClick={() => setLightbox(i)}
+                >
+                  <img src={photo.img} alt={photo.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
               </AnimatedSection>
             ))}
@@ -239,6 +247,31 @@ const WindowsPage = () => {
       </section>
 
       <Footer />
+
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
+            onClick={() => setLightbox(null)}
+          >
+            <button className="absolute top-6 right-6 text-white" onClick={() => setLightbox(null)}>
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              src={workPhotos[lightbox]?.img}
+              alt={workPhotos[lightbox]?.title}
+              className="max-w-full max-h-[85vh] rounded-xl object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
