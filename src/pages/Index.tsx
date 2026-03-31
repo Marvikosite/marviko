@@ -288,6 +288,7 @@ const Index = () => {
   const [ctaErrors, setCtaErrors] = useState({ name: false, phone: false });
   const [ctaSending, setCtaSending] = useState(false);
   const [ctaSubmitted, setCtaSubmitted] = useState(false);
+  const [reviewModal, setReviewModal] = useState<string | null>(null);
   const certImages = [
     { img: certSpk1, title: "Свидетельство о технической компетентности" },
     { img: certSpk2, title: "Область технической компетентности" },
