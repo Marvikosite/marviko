@@ -636,7 +636,7 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {processSteps.map((step, i) => (
-              <AnimatedSection key={step.num} delay={i * 0.1}>
+              <AnimatedSection key={step.num} delay={i * 0.15} variant="slide-up">
                 <div className="relative">
                   <div className="w-14 h-14 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-4" style={{ border: "2px solid hsl(var(--primary))" }}>
                     {step.num}
