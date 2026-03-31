@@ -1183,6 +1183,32 @@ const Index = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Portfolio Lightbox */}
+      <AnimatePresence>
+        {portfolioLightbox !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
+            onClick={() => setPortfolioLightbox(null)}
+          >
+            <button className="absolute top-6 right-6 text-white" onClick={() => setPortfolioLightbox(null)}>
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              src={portfolioItems[portfolioLightbox]?.img}
+              alt={portfolioItems[portfolioLightbox]?.title}
+              className="max-w-full max-h-[85vh] rounded-xl object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
