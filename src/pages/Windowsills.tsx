@@ -124,30 +124,26 @@ const WindowsillsPage = () => {
             <SectionLabel>Фотогалерея</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Примеры наших подоконников</h2>
           </AnimatedSection>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {galleryItems.map((item, i) => (
               <AnimatedSection key={i} delay={i * 0.08}>
-                <div>
-                  <img
-                    src={item.img}
-                    alt={item.caption}
-                    className="w-full rounded-xl object-cover"
-                    style={{ aspectRatio: "4/3" }}
-                  />
-                  <p className="text-[13px] text-muted-foreground mt-2">{item.caption}</p>
+                <div
+                  className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]"
+                  onClick={() => setLightbox(i)}
+                >
+                  <img src={item.img} alt={item.caption} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
               </AnimatedSection>
             ))}
-            {/* Catalog spans 2 columns */}
-            <AnimatedSection delay={0.5} className="sm:col-span-2 lg:col-span-2">
-              <div>
-                <img
-                  src={windowsillCatalog}
-                  alt="Каталог цветов премиум подоконников"
-                  className="w-full rounded-xl object-cover"
-                  style={{ aspectRatio: "16/9" }}
-                />
-                <p className="text-[13px] text-muted-foreground mt-2">Каталог цветов премиум подоконников</p>
+            {/* Catalog spans full width */}
+            <AnimatedSection delay={0.5} className="col-span-2 lg:col-span-3">
+              <div
+                className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[21/9]"
+                onClick={() => setLightbox(galleryItems.length)}
+              >
+                <img src={windowsillCatalog} alt="Каталог цветов премиум подоконников" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
               </div>
             </AnimatedSection>
           </div>
