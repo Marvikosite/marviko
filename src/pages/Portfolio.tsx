@@ -13,13 +13,6 @@ import portfolio4 from "@/assets/portfolio-4.jpg";
 import portfolio5 from "@/assets/portfolio-5.jpg";
 import portfolio6 from "@/assets/portfolio-6.jpg";
 
-import workWindowOpen from "@/assets/work-window-open.jpg";
-import workWindowTrees from "@/assets/work-window-trees.jpg";
-import workHouseExterior from "@/assets/work-house-exterior.jpg";
-import workDoorBrown from "@/assets/work-door-brown.jpg";
-import workDoorGlass from "@/assets/work-door-glass.jpg";
-import workWindowFireplace from "@/assets/work-window-fireplace.jpg";
-
 import partitionsOffice from "@/assets/partitions-office.jpg";
 import windowsillReal1 from "@/assets/windowsill-real-1.jpg";
 import windowsillReal2 from "@/assets/windowsill-real-2.jpg";
