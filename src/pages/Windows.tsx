@@ -30,10 +30,10 @@ const profiles = [
     width: "58 мм",
     glass: "Двухкамерный 32 мм",
     prices: [
-      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "302 BYN", furniture: "Accado UPT" },
-      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "395 BYN", furniture: "Accado UPT" },
-      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "535 BYN", furniture: "Accado UPT" },
-      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "590 BYN", furniture: "Accado UPT" },
+      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "302 BYN" },
+      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "395 BYN" },
+      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "535 BYN" },
+      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "590 BYN" },
     ],
     features: ["Базовая теплоизоляция", "Белый профиль", "Фурнитура Accado UPT"],
   },
@@ -42,10 +42,10 @@ const profiles = [
     width: "70 мм",
     glass: "Двухкамерный 40 мм",
     prices: [
-      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "315 BYN", furniture: "MACO" },
-      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "414 BYN", furniture: "MACO" },
-      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "565 BYN", furniture: "MACO" },
-      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "625 BYN", furniture: "MACO" },
+      { type: "single" as const, title: "Одностворчатое", size: "1400×800", price: "315 BYN" },
+      { type: "double" as const, title: "Двустворчатое", size: "1400×1300", price: "414 BYN" },
+      { type: "triple" as const, title: "Трёхстворчатое", size: "1400×2000", price: "565 BYN" },
+      { type: "balcony" as const, title: "Балконный блок", size: "2100×1500", price: "625 BYN" },
     ],
     features: ["Улучшенная теплоизоляция", "Армирование 1.5 мм", "Микропроветривание"],
     popular: true,
@@ -99,7 +99,7 @@ const WindowsPage = () => {
               {windowTypes.map((t) => (
                 <span
                   key={t}
-                  className="inline-block rounded-full font-semibold"
+                  className="inline-block rounded-full select-none cursor-default"
                   style={{ backgroundColor: "#FDF3EC", color: "#C8441A", padding: "6px 16px", fontSize: "13px", fontWeight: 600 }}
                 >
                   {t}
@@ -157,7 +157,7 @@ const WindowsPage = () => {
                         </div>
                         <p className="text-sm font-semibold mb-1">{item.title}</p>
                         <p className="text-xs font-mono text-muted-foreground mb-1">Размер {item.size} мм</p>
-                        <p className="text-xs text-muted-foreground mb-1">Фурнитура {item.furniture}</p>
+                        <p className="text-xs text-muted-foreground mb-1">Фурнитура: <span className="font-semibold text-foreground">Accado · UPT · MACO</span></p>
                         <p className="text-xl font-extrabold text-primary mt-1">{item.price}</p>
                         <button className="mt-3 bg-primary text-primary-foreground py-2 px-5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all">
                           Заказать
