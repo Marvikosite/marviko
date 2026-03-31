@@ -680,23 +680,46 @@ const Index = () => {
             <SectionLabel>Отзывы</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Что говорят клиенты</h2>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {reviews.map((review, i) => (
               <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="bg-card rounded-xl p-6 card-shadow">
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: review.rating }).map((_, j) => (
-                      <Star key={j} className="w-4 h-4 fill-accent text-accent" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-body mb-4 text-muted-foreground">"{review.text}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
-                      {review.name[0]}
+                {review.type === "messenger" ? (
+                  <div className="bg-muted rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col">
+                    <div className="flex items-center gap-2 mb-3">
+                      {/* Viber icon */}
+                      <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
+                      <span className="font-bold text-sm">{review.name}</span>
                     </div>
-                    <span className="font-semibold text-sm">{review.name}</span>
+                    <div className="flex gap-0.5 mb-2">
+                      {Array.from({ length: review.rating }).map((_, j) => (
+                        <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-body text-foreground flex-1">{review.text}</p>
+                    {review.date && (
+                      <p className="text-[11px] text-muted-foreground text-right mt-3">{review.date}</p>
+                    )}
                   </div>
-                </div>
+                ) : (
+                  <div className="bg-card rounded-xl p-5 border-2 border-primary h-full flex flex-col">
+                    <div className="flex items-center gap-2 mb-3">
+                      <FileText className="w-5 h-5 text-primary" />
+                      <div>
+                        <span className="font-bold text-sm block">{review.name}</span>
+                        {"position" in review && <span className="text-xs text-muted-foreground">{review.position}</span>}
+                      </div>
+                    </div>
+                    <div className="flex gap-0.5 mb-2">
+                      {Array.from({ length: review.rating }).map((_, j) => (
+                        <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
+                      ))}
+                    </div>
+                    <p className="text-sm text-body text-muted-foreground flex-1">{review.text}</p>
+                    {review.date && (
+                      <p className="text-xs text-muted-foreground mt-3">{review.date}</p>
+                    )}
+                  </div>
+                )}
               </AnimatedSection>
             ))}
           </div>
