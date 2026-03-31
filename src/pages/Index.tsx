@@ -479,7 +479,7 @@ const Index = () => {
       {/* Pricing - mosokna style clean cards */}
       <section id="pricing" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="blur">
             <SectionLabel>Цены</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
             <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с монтажом для профиля Novotex Techno 58.</p>
