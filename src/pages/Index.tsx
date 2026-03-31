@@ -842,7 +842,7 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {accessories.map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.08}>
+              <AnimatedSection key={item.title} delay={i * 0.1} variant="fade-left">
                 <Link
                   to={item.title === "Подоконники" ? "/windowsills" : "#"}
                   className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start block"
