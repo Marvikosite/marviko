@@ -456,7 +456,7 @@ const Index = () => {
       {/* Why Us */}
       <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-right">
             <SectionLabel>Преимущества</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Почему выбирают Марвико</h2>
           </AnimatedSection>
