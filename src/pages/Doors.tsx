@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, ArrowRight, Phone, Send } from "lucide-react";
+import { Check, ArrowRight, Phone, Send, Eye, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
@@ -50,6 +50,16 @@ const DoorsPage = () => {
   const [orderErrors, setOrderErrors] = useState({ name: false, phone: false });
   const [orderSending, setOrderSending] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  const galleryImages = [
+    { src: doorReal1, alt: "Раздвижная балконная дверь" },
+    { src: doorReal3, alt: "Входная дверь зелёная ПВХ" },
+    { src: doorReal4, alt: "Входная группа магазина" },
+    { src: doorReal5, alt: "Белая входная дверь ПВХ" },
+    { src: doorReal6, alt: "Дверь с ламинацией под дерево" },
+    { src: doorReal7, alt: "Входная дверь с боковой створкой" },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -109,18 +119,20 @@ const DoorsPage = () => {
             <SectionLabel>Примеры работ</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Наши установленные двери</h2>
           </AnimatedSection>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { src: doorReal1, alt: "Раздвижная балконная дверь" },
-              { src: doorReal3, alt: "Входная дверь зелёная ПВХ" },
-              { src: doorReal4, alt: "Входная группа магазина" },
-              { src: doorReal5, alt: "Белая входная дверь ПВХ" },
-              { src: doorReal6, alt: "Дверь с ламинацией под дерево" },
-              { src: doorReal7, alt: "Входная дверь с боковой створкой" },
-            ].map((img, i) => (
+          <div className="columns-2 lg:columns-3 gap-4 space-y-4">
+            {galleryImages.map((img, i) => (
               <AnimatedSection key={i} delay={i * 0.08}>
-                <div className="rounded-xl overflow-hidden group aspect-[3/4]">
-                  <img src={img.src} alt={img.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div
+                  className="rounded-xl overflow-hidden group cursor-pointer break-inside-avoid"
+                  onClick={() => setLightbox(i)}
+                >
+                  <div className="relative">
+                    <img src={img.src} alt={img.alt} className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-primary/70">
+                      <Eye className="w-8 h-8 text-primary-foreground mb-2" />
+                      <span className="text-primary-foreground text-sm font-semibold text-center px-3">{img.alt}</span>
+                    </div>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
@@ -129,6 +141,32 @@ const DoorsPage = () => {
       </section>
 
       <Footer />
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
+            onClick={() => setLightbox(null)}
+          >
+            <button className="absolute top-6 right-6 text-primary-foreground" onClick={() => setLightbox(null)}>
+              <X className="w-8 h-8" />
+            </button>
+            <motion.img
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              src={galleryImages[lightbox]?.src}
+              alt={galleryImages[lightbox]?.alt}
+              className="max-w-full max-h-[85vh] rounded-xl object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Order Modal */}
       <AnimatePresence>
