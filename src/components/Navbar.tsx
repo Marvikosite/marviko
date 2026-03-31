@@ -89,10 +89,6 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
         <div className="container mx-auto section-padding flex items-center justify-between h-9">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <MapPin className="w-3 h-3 opacity-60" />
-              г. Червень, пл. Свободы, 32
-            </span>
-            <span className="hidden sm:flex items-center gap-1.5">
               <Clock className="w-3 h-3 opacity-60" />
               Пн–Пт 9:00–17:00
             </span>
@@ -113,7 +109,7 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
       <nav className="bg-card/95 backdrop-blur-md" style={{ boxShadow: "0 1px 0 0 hsl(var(--border))" }}>
         <div className="container mx-auto section-padding flex items-center justify-between h-[68px]">
           <Link to="/" className="flex items-center shrink-0">
-            <img src={logo} alt="Марвико — окна, двери, балконы" className="h-10 w-auto" />
+            <img src={logo} alt="Марвико — окна, двери, балконы" className="h-14 w-auto" />
           </Link>
 
           <div className="hidden lg:flex items-center gap-0.5">
