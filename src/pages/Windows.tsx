@@ -132,7 +132,7 @@ const WindowsPage = () => {
                       <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full ml-auto">Популярный</span>
                     )}
                   </div>
-                  <div className="p-6 bg-card border-b border-border">
+                  <div className="p-6 bg-card border-b border-border pointer-events-none select-none">
                     <ul className="flex flex-wrap gap-4">
                       {p.features.map((f) => (
                         <li key={f} className="flex items-center gap-2 text-sm">
