@@ -161,8 +161,9 @@ const WindowsPage = () => {
                         <p className="text-xs font-mono text-muted-foreground mb-1">Размер {item.size} мм</p>
                         <p className="text-xs text-muted-foreground mb-1">Фурнитура: <span className="font-semibold text-foreground">Accado · UPT · MACO</span></p>
                         <p className="text-xl font-extrabold text-primary mt-1">{item.price}</p>
-                        <button className="mt-3 bg-primary text-primary-foreground py-2 px-5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all">
+                        <button onClick={() => setOrderModal(true)} className="mt-3 bg-primary text-primary-foreground py-2 px-5 rounded-lg text-sm font-semibold hover:opacity-90 transition-all">
                           Заказать
+                        </button>
                         </button>
                       </div>
                     ))}
