@@ -28,6 +28,11 @@ import certSpk2 from "@/assets/cert-spk-2.jpg";
 import svidetelstvoImg from "@/assets/cert-svidetelstvo.jpg";
 import isoImg from "@/assets/cert-iso-9001.jpg";
 
+import reviewEkaterina from "@/assets/review-ekaterina.jpg";
+import reviewNatalia from "@/assets/review-natalia.jpg";
+import reviewBobrovich from "@/assets/review-bobrovich.jpg";
+import reviewRentalTrade from "@/assets/review-rental-trade.jpg";
+
 
 const categories = [
   {
@@ -95,6 +100,7 @@ const reviews = [
     date: "10 окт. 2025",
     text: "Спасибо вашему мастеру за окна — работа огонь! Очень красиво всё сделал. Ему надо отдельно от зарплаты хорошую премию выдавать — один сделал такую работу, благодарность надо писать!",
     rating: 5,
+    screenshot: reviewEkaterina,
   },
   {
     type: "messenger" as const,
@@ -102,6 +108,7 @@ const reviews = [
     date: "вчера",
     text: "Хочу сказать Вашей команде большое спасибо — как классно Вы работаете, как всё чётко и красиво. Когда звонишь — очень приятно разговаривать, всегда всё объясните, расскажете, поможете, не завышаете цены. Спасибо Вам огромное!",
     rating: 5,
+    screenshot: reviewNatalia,
   },
   {
     type: "messenger" as const,
@@ -109,6 +116,7 @@ const reviews = [
     date: "",
     text: "Долго выбирала, где заказать окна и двери, чтобы цена и качество соответствовали запросам. Выбрала ООО «Марвико» и не прогадала! Очень довольна результатом. Окна и двери отличные, проверены временем. Спасибо за профессионализм и слаженную работу. Рекомендую тем, кто сомневается в выборе.",
     rating: 5,
+    screenshot: reviewBobrovich,
   },
   {
     type: "official" as const,
@@ -117,6 +125,7 @@ const reviews = [
     date: "февраль 2026",
     text: "Обратились с заявкой об установке двери ПВХ. Хотим выразить благодарность за дверь и за её качественный монтаж. Дверь установлена идеально и быстро, отлично выглядит, очень хорошо вписалась в наш интерьер.",
     rating: 5,
+    screenshot: reviewRentalTrade,
   },
 ];
 
@@ -279,6 +288,7 @@ const Index = () => {
   const [ctaErrors, setCtaErrors] = useState({ name: false, phone: false });
   const [ctaSending, setCtaSending] = useState(false);
   const [ctaSubmitted, setCtaSubmitted] = useState(false);
+  const [reviewModal, setReviewModal] = useState<string | null>(null);
   const certImages = [
     { img: certSpk1, title: "Свидетельство о технической компетентности" },
     { img: certSpk2, title: "Область технической компетентности" },
@@ -684,48 +694,81 @@ const Index = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {reviews.map((review, i) => (
               <AnimatedSection key={i} delay={i * 0.1}>
-                {review.type === "messenger" ? (
-                  <div className="bg-muted rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col">
-                    <div className="flex items-center gap-2 mb-3">
-                      {/* Viber icon */}
-                      <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
-                      <span className="font-bold text-sm">{review.name}</span>
-                    </div>
-                    <div className="flex gap-0.5 mb-2">
-                      {Array.from({ length: review.rating }).map((_, j) => (
-                        <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
-                      ))}
-                    </div>
-                    <p className="text-sm text-body text-foreground flex-1">{review.text}</p>
-                    {review.date && (
-                      <p className="text-[11px] text-muted-foreground text-right mt-3">{review.date}</p>
-                    )}
-                  </div>
-                ) : (
-                  <div className="bg-card rounded-xl p-5 border-2 border-primary h-full flex flex-col">
-                    <div className="flex items-center gap-2 mb-3">
-                      <FileText className="w-5 h-5 text-primary" />
-                      <div>
-                        <span className="font-bold text-sm block">{review.name}</span>
-                        {"position" in review && <span className="text-xs text-muted-foreground">{review.position}</span>}
+                <button
+                  onClick={() => setReviewModal(review.screenshot)}
+                  className="text-left w-full h-full"
+                >
+                  {review.type === "messenger" ? (
+                    <div className="bg-muted rounded-2xl rounded-tl-sm p-5 relative h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-primary-foreground" style={{ backgroundColor: "#7360F2" }}>V</span>
+                        <span className="font-bold text-sm">{review.name}</span>
                       </div>
+                      <div className="flex gap-0.5 mb-2">
+                        {Array.from({ length: review.rating }).map((_, j) => (
+                          <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
+                        ))}
+                      </div>
+                      <p className="text-sm text-body text-foreground flex-1">{review.text}</p>
+                      {review.date && (
+                        <p className="text-[11px] text-muted-foreground text-right mt-3">{review.date}</p>
+                      )}
+                      <p className="text-xs text-primary mt-2 flex items-center gap-1">
+                        <Eye className="w-3.5 h-3.5" /> Показать скриншот
+                      </p>
                     </div>
-                    <div className="flex gap-0.5 mb-2">
-                      {Array.from({ length: review.rating }).map((_, j) => (
-                        <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
-                      ))}
+                  ) : (
+                    <div className="bg-card rounded-xl p-5 border-2 border-primary h-full flex flex-col hover:shadow-lg transition-shadow cursor-pointer">
+                      <div className="flex items-center gap-2 mb-3">
+                        <FileText className="w-5 h-5 text-primary" />
+                        <div>
+                          <span className="font-bold text-sm block">{review.name}</span>
+                          {"position" in review && <span className="text-xs text-muted-foreground">{review.position}</span>}
+                        </div>
+                      </div>
+                      <div className="flex gap-0.5 mb-2">
+                        {Array.from({ length: review.rating }).map((_, j) => (
+                          <Star key={j} className="w-3.5 h-3.5 fill-accent text-accent" />
+                        ))}
+                      </div>
+                      <p className="text-sm text-body text-muted-foreground flex-1">{review.text}</p>
+                      {review.date && (
+                        <p className="text-xs text-muted-foreground mt-3">{review.date}</p>
+                      )}
+                      <p className="text-xs text-primary mt-2 flex items-center gap-1">
+                        <Eye className="w-3.5 h-3.5" /> Показать оригинал
+                      </p>
                     </div>
-                    <p className="text-sm text-body text-muted-foreground flex-1">{review.text}</p>
-                    {review.date && (
-                      <p className="text-xs text-muted-foreground mt-3">{review.date}</p>
-                    )}
-                  </div>
-                )}
+                  )}
+                </button>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Review screenshot modal */}
+      <AnimatePresence>
+        {reviewModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/80"
+            onClick={() => setReviewModal(null)}
+          >
+            <motion.img
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              src={reviewModal}
+              alt="Отзыв"
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Certificates - mosokna carousel style */}
       <section id="certificates" className="py-20 bg-background">
