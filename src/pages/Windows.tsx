@@ -74,7 +74,7 @@ const WindowsPage = () => {
   const [orderModal, setOrderModal] = useState(false);
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar onOrderClick={() => setOrderModal(true)} />
 
       {/* Hero */}
       <section className="py-20 relative" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
