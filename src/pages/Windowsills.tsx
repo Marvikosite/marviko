@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, ArrowRight, Phone, Send } from "lucide-react";
+import { Check, ArrowRight, Phone, Send, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
