@@ -669,10 +669,10 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {portfolioItems.map((item, i) => (
-              <AnimatedSection key={i} delay={i * 0.08}>
+              <AnimatedSection key={i} delay={i * 0.1} variant="scale">
                 <div className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
+                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
               </AnimatedSection>
             ))}
           </div>
