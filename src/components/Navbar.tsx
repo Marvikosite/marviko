@@ -89,10 +89,6 @@ const Navbar = ({ onOrderClick }: NavbarProps) => {
         <div className="container mx-auto section-padding flex items-center justify-between h-9">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <MapPin className="w-3 h-3 opacity-60" />
-              г. Червень, пл. Свободы, 32
-            </span>
-            <span className="hidden sm:flex items-center gap-1.5">
               <Clock className="w-3 h-3 opacity-60" />
               Пн–Пт 9:00–17:00
             </span>
