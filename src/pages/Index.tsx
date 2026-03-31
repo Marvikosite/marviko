@@ -5,7 +5,7 @@ import { Shield, Clock, Award, ThumbsUp, Star, ChevronDown, Eye, ArrowRight, Pho
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
-import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedSection, { ParallaxImage } from "@/components/AnimatedSection";
 
 
 import heroImg from "@/assets/hero-interior.jpg";
@@ -302,10 +302,8 @@ const Index = () => {
 
       {/* Hero - lighter warm feel */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">
-        <div className="absolute inset-0">
-          <img src={heroImg} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 100%)" }} />
-        </div>
+        <ParallaxImage src={heroImg} speed={0.25} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.3) 100%)" }} />
         <div className="container mx-auto section-padding relative z-10 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -424,13 +422,13 @@ const Index = () => {
       {/* Services - mosokna style grid cards with icons */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-left">
             <SectionLabel>Продукция</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Наши услуги</h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat, i) => (
-              <AnimatedSection key={cat.title} delay={i * 0.1}>
+              <AnimatedSection key={cat.title} delay={i * 0.12} variant="scale">
                 <Link
                   to={cat.link}
                   className="block rounded-xl overflow-hidden bg-card border border-border hover:border-primary card-shadow hover:card-shadow-hover transition-all duration-300 group"
@@ -458,14 +456,14 @@ const Index = () => {
       {/* Why Us */}
       <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-right">
             <SectionLabel>Преимущества</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Почему выбирают Марвико</h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyUs.map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.1}>
-                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary h-full flex flex-col">
+              <AnimatedSection key={item.title} delay={i * 0.12} variant="slide-up">
+                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 border border-border hover:border-primary h-full flex flex-col">
                   <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary mb-4">
                     {item.icon}
                   </div>
@@ -481,7 +479,7 @@ const Index = () => {
       {/* Pricing - mosokna style clean cards */}
       <section id="pricing" className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="blur">
             <SectionLabel>Цены</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-4">Цены на наши окна</h2>
             <p className="text-muted-foreground text-body mb-10 max-w-xl">Стоимость окон ПВХ с монтажом для профиля Novotex Techno 58.</p>
@@ -632,13 +630,13 @@ const Index = () => {
       {/* Process */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-left">
             <SectionLabel>Этапы</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-12">Как мы работаем</h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {processSteps.map((step, i) => (
-              <AnimatedSection key={step.num} delay={i * 0.1}>
+              <AnimatedSection key={step.num} delay={i * 0.15} variant="slide-up">
                 <div className="relative">
                   <div className="w-14 h-14 rounded-full flex items-center justify-center text-primary font-bold text-lg mb-4" style={{ border: "2px solid hsl(var(--primary))" }}>
                     {step.num}
@@ -658,7 +656,7 @@ const Index = () => {
       {/* Portfolio preview - real work photos */}
       <section className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-right">
             <div className="flex items-end justify-between mb-10">
               <div>
                 <SectionLabel>Портфолио</SectionLabel>
@@ -671,9 +669,10 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             {portfolioItems.map((item, i) => (
-              <AnimatedSection key={i} delay={i * 0.08}>
+              <AnimatedSection key={i} delay={i * 0.1} variant="scale">
                 <div className="relative rounded-xl overflow-hidden group cursor-pointer aspect-[4/3]">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                 </div>
               </AnimatedSection>
             ))}
@@ -687,13 +686,13 @@ const Index = () => {
       {/* Reviews */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-left">
             <SectionLabel>Отзывы</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Что говорят клиенты</h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {reviews.map((review, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
+              <AnimatedSection key={i} delay={i * 0.1} variant="fade-right">
                 <button
                   onClick={() => setReviewModal(review.screenshot)}
                   className="text-left w-full h-full"
@@ -837,13 +836,13 @@ const Index = () => {
       {/* Accessories section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="blur">
             <SectionLabel>Дополнительно</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Также устанавливаем и продаём</h2>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {accessories.map((item, i) => (
-              <AnimatedSection key={item.title} delay={i * 0.08}>
+              <AnimatedSection key={item.title} delay={i * 0.1} variant="fade-left">
                 <Link
                   to={item.title === "Подоконники" ? "/windowsills" : "#"}
                   className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 border border-border hover:border-primary flex gap-4 items-start block"
@@ -1014,7 +1013,7 @@ const Index = () => {
       {/* Contacts */}
       <section className="py-20 bg-background">
         <div className="container mx-auto section-padding">
-          <AnimatedSection>
+          <AnimatedSection variant="fade-right">
             <SectionLabel>Контакты</SectionLabel>
             <h2 className="text-3xl sm:text-4xl text-display mb-10">Свяжитесь с нами</h2>
           </AnimatedSection>
@@ -1025,8 +1024,8 @@ const Index = () => {
               { icon: <MapPin className="w-6 h-6" />, title: "Офис", value: "г. Червень, пл. Свободы, 32, к. 206", href: undefined },
               { icon: <MapPin className="w-6 h-6" />, title: "Производство", value: "г. Червень, ул. Ленинская, 49", href: undefined },
             ].map((contact, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover transition-shadow duration-300 text-center border border-border hover:border-primary">
+              <AnimatedSection key={i} delay={i * 0.12} variant="slide-up">
+                <div className="bg-card rounded-xl p-6 card-shadow hover:card-shadow-hover hover:-translate-y-2 transition-all duration-300 text-center border border-border hover:border-primary">
                   <div className="w-12 h-12 rounded-lg bg-accent-light flex items-center justify-center text-primary mb-4 mx-auto">
                     {contact.icon}
                   </div>
