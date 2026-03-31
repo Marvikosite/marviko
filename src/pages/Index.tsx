@@ -28,6 +28,11 @@ import certSpk2 from "@/assets/cert-spk-2.jpg";
 import svidetelstvoImg from "@/assets/cert-svidetelstvo.jpg";
 import isoImg from "@/assets/cert-iso-9001.jpg";
 
+import reviewEkaterina from "@/assets/review-ekaterina.jpg";
+import reviewNatalia from "@/assets/review-natalia.jpg";
+import reviewBobrovich from "@/assets/review-bobrovich.jpg";
+import reviewRentalTrade from "@/assets/review-rental-trade.jpg";
+
 
 const categories = [
   {
