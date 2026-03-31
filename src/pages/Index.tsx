@@ -28,6 +28,7 @@ import certSpk2 from "@/assets/cert-spk-2.jpg";
 import svidetelstvoImg from "@/assets/cert-svidetelstvo.jpg";
 import isoImg from "@/assets/cert-iso-9001.jpg";
 
+
 const categories = [
   {
     title: "Пластиковые окна",
