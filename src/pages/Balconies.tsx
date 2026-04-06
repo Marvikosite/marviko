@@ -6,7 +6,7 @@ import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
 import OrderModal from "@/components/OrderModal";
 import balconyHero from "@/assets/balcony-hero.jpg";
-import portfolio2 from "@/assets/portfolio-2.jpg";
+
 
 const options = [
   {
