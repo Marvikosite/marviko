@@ -944,7 +944,7 @@ const Index = () => {
       {/* FAQ + Contact Form - mosokna style */}
       <section id="faq" className="py-20" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
         <div className="container mx-auto section-padding">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* FAQ */}
             <div>
               <AnimatedSection>
