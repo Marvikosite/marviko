@@ -371,6 +371,11 @@ const Index = () => {
   const [formSubmitted, setFormSubmitted] = useState({ contact: false, order: false });
   const [orderSending, setOrderSending] = useState(false);
   const [portfolioLightbox, setPortfolioLightbox] = useState<number | null>(null);
+  const [portfolioFilter, setPortfolioFilter] = useState("all");
+
+  const filteredPortfolio = portfolioFilter === "all"
+    ? portfolioItems
+    : portfolioItems.filter(item => item.category === portfolioFilter);
   const [ctaForm, setCtaForm] = useState({ name: "", phone: "" });
   const [ctaErrors, setCtaErrors] = useState({ name: false, phone: false });
   const [ctaSending, setCtaSending] = useState(false);
