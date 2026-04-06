@@ -509,10 +509,10 @@ const Index = () => {
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat, i) => (
-              <AnimatedSection key={cat.title} delay={i * 0.12} variant="scale">
+              <AnimatedSection key={cat.title} delay={i * 0.12} variant="scale" className="h-full">
                 <Link
                   to={cat.link}
-                  className="block rounded-xl overflow-hidden bg-card border border-border hover:border-primary card-shadow hover:card-shadow-hover transition-all duration-300 group"
+                  className="block rounded-xl overflow-hidden bg-card border border-border hover:border-primary card-shadow hover:card-shadow-hover transition-all duration-300 group h-full"
                 >
                   <div className="p-6 flex flex-col h-full">
                     <div className="w-full h-40 rounded-lg overflow-hidden mb-5 bg-muted">
