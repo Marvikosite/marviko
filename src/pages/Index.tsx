@@ -294,39 +294,41 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
     );
   }
 
-  // balcony — narrow door on left, wider window on right (like mosokna)
+  // balcony — wide window on left (upper portion only), narrow door on right (full height)
   const fw = 160, fh = 140;
   const fx = (VW - fw) / 2, fy = (VH - fh) / 2;
   const impW = 3, frmH = 3;
   const gx = fx + depth, gy = fy + depth, totalGW = fw - 2 * depth, gh = fh - 2 * depth;
-  // Door is ~35% width (narrow), window is ~65% (wider) — like the reference
-  const doorW = Math.round(totalGW * 0.35);
-  const winW = totalGW - doorW - impW;
+  // Window is ~60% width (wide), door is ~40% (narrow)
+  const winW = Math.round(totalGW * 0.6);
+  const doorW = totalGW - winW - impW;
   const dtH = Math.round(gh * 0.65 - frmH / 2);
   const dbH = gh - dtH - frmH;
-  const wx = gx + doorW + impW;
+  const dx = gx + winW + impW; // door x position (right side)
   return (
     <svg width="180" height="160" viewBox={`0 0 ${VW} ${VH}`}>
       {glassDef("gb")}
       <rect x={fx} y={fy} width={fw} height={fh} rx={1} fill="white" stroke={frameColor} strokeWidth={1.5} filter="url(#outerShadow)" />
       {reveal(fx, fy, fw, fh, depth)}
-      {/* Door top */}
-      <rect x={gx} y={gy} width={doorW} height={dtH} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
-      {/* Horizontal impost */}
-      <rect x={gx} y={gy + dtH} width={doorW} height={frmH} fill={frameColor} />
-      {/* Door bottom */}
-      <rect x={gx} y={gy + dtH + frmH} width={doorW} height={dbH} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
-      {/* Vertical impost */}
-      <rect x={gx + doorW} y={fy + depth} width={impW} height={gh} fill={frameColor} />
-      {/* Window — full height, fixed */}
-      <rect x={wx} y={gy} width={winW} height={gh} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
+      {/* Left: Window — only upper portion height, fixed/deaf */}
+      <rect x={gx} y={gy} width={winW} height={dtH} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
+      {/* Wall/panel below window (no glass, just frame fill) */}
+      <rect x={gx} y={gy + dtH} width={winW} height={gh - dtH} fill="#F0EFED" stroke={frameColor} strokeWidth={0.8} />
+      {/* Vertical impost between window and door */}
+      <rect x={gx + winW} y={fy + depth} width={impW} height={gh} fill={frameColor} />
+      {/* Door top glass */}
+      <rect x={dx} y={gy} width={doorW} height={dtH} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
+      {/* Horizontal impost on door */}
+      <rect x={dx} y={gy + dtH} width={doorW} height={frmH} fill={frameColor} />
+      {/* Door bottom glass */}
+      <rect x={dx} y={gy + dtH + frmH} width={doorW} height={dbH} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
       {/* Door hardware */}
-      {hinges(gx, gy, dtH, 3)}
-      {handle(gx + doorW - 4, gy + dtH / 2)}
-      {diags("left", gx, gy, doorW, dtH)}
-      {hinges(gx, gy + dtH + frmH, dbH, 2)}
-      {handle(gx + doorW - 4, gy + dtH + frmH + dbH / 2)}
-      {diags("left", gx, gy + dtH + frmH, doorW, dbH)}
+      {hinges(dx, gy, dtH, 3)}
+      {handle(dx + doorW - 4, gy + dtH / 2)}
+      {diags("left", dx, gy, doorW, dtH)}
+      {hinges(dx, gy + dtH + frmH, dbH, 2)}
+      {handle(dx + doorW - 4, gy + dtH + frmH + dbH / 2)}
+      {diags("left", dx, gy + dtH + frmH, doorW, dbH)}
     </svg>
   );
 };
