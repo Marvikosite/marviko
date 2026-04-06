@@ -11,6 +11,7 @@ import PartitionsPage from "./pages/Partitions.tsx";
 import WindowsillsPage from "./pages/Windowsills.tsx";
 import PortfolioPage from "./pages/Portfolio.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/windows" element={<WindowsPage />} />
