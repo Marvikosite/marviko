@@ -985,6 +985,7 @@ const Index = () => {
             {/* Contact Form - mosokna style */}
             <div>
               <AnimatedSection>
+                <SectionLabel>Контакты</SectionLabel>
                 <h2 className="text-2xl sm:text-3xl text-display mb-2">Возникли вопросы?</h2>
                 <p className="text-muted-foreground text-body mb-8">
                   Напишите, и наши специалисты подробно ответят вам в удобной форме.
