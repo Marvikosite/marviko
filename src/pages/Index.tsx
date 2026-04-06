@@ -1307,8 +1307,8 @@ const Index = () => {
             <motion.img
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
-              src={portfolioItems[portfolioLightbox]?.img}
-              alt={portfolioItems[portfolioLightbox]?.title}
+              src={filteredPortfolio[portfolioLightbox]?.img}
+              alt={filteredPortfolio[portfolioLightbox]?.title}
               className="max-w-full max-h-[85vh] rounded-xl object-contain"
               onClick={(e) => e.stopPropagation()}
             />
