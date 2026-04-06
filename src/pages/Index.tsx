@@ -184,38 +184,63 @@ const portfolioItems = [
 ];
 
 const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "balcony" }) => {
-  const frameStroke = "#BDBAB4";
-  const impostFill = "#BDBAB4";
-  const glassStroke = "#BDBAB4";
+  // All windows render into a fixed 220x180 viewBox for alignment
+  const VW = 220, VH = 180;
 
   const glassDef = (id: string) => (
     <defs>
       <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor="#87CEEB" />
-        <stop offset="100%" stopColor="#E8F4F8" />
+        <stop offset="0%" stopColor="#C5E8F7" />
+        <stop offset="100%" stopColor="#EAF6FB" />
       </linearGradient>
+      <filter id="outerShadow">
+        <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#000" floodOpacity="0.08" />
+      </filter>
+      <filter id="innerReveal">
+        <feDropShadow dx="2" dy="2" stdDeviation="2" floodColor="#000" floodOpacity="0.06" />
+      </filter>
     </defs>
   );
 
-  const hinges = (x: number, y: number, h: number, count = 3) => {
+  // 3D reveal/slope effect — trapezoid shape on one side
+  const reveal = (x: number, y: number, w: number, h: number, depth: number = 8) => (
+    <g>
+      {/* Top slope */}
+      <polygon points={`${x},${y} ${x + w},${y} ${x + w - depth},${y + depth} ${x + depth},${y + depth}`} fill="#E8E6E3" />
+      {/* Bottom slope */}
+      <polygon points={`${x + depth},${y + h - depth} ${x + w - depth},${y + h - depth} ${x + w},${y + h} ${x},${y + h}`} fill="#D5D2CE" />
+      {/* Left slope */}
+      <polygon points={`${x},${y} ${x + depth},${y + depth} ${x + depth},${y + h - depth} ${x},${y + h}`} fill="#DDDAD6" />
+      {/* Right slope */}
+      <polygon points={`${x + w - depth},${y + depth} ${x + w},${y} ${x + w},${y + h} ${x + w - depth},${y + h - depth}`} fill="#D0CCC8" />
+    </g>
+  );
+
+  const hinges = (hx: number, hy: number, hh: number, count = 3) => {
     const items = [];
-    const sp = h / (count + 1);
-    for (let i = 1; i <= count; i++) items.push(<rect key={i} x={x} y={y + sp * i - 4} width={4} height={8} fill="#C8C8C8" stroke="#AAAAAA" strokeWidth={0.5} rx={1} />);
+    const sp = hh / (count + 1);
+    for (let i = 1; i <= count; i++) items.push(<rect key={i} x={hx} y={hy + sp * i - 3} width={3} height={6} fill="#C0C0C0" rx={0.5} />);
     return items;
   };
-  const handle = (x: number, cy: number) => <rect x={x} y={cy - 7} width={4} height={14} fill="#BBBBBB" stroke="#999" strokeWidth={0.5} rx={1} />;
+  const handle = (hx: number, cy: number) => <rect x={hx} y={cy - 6} width={3} height={12} fill="#B8B8B8" rx={0.5} />;
   const diags = (side: "left" | "right", sx: number, sy: number, sw: number, sh: number) => {
-    if (side === "left") return <g opacity={0.7}><line x1={sx} y1={sy + sh} x2={sx + sw} y2={sy} stroke="#AAAAAA" strokeWidth={0.8} /><line x1={sx} y1={sy} x2={sx + sw} y2={sy + sh / 2} stroke="#AAAAAA" strokeWidth={0.8} /></g>;
-    return <g opacity={0.7}><line x1={sx + sw} y1={sy + sh} x2={sx} y2={sy} stroke="#AAAAAA" strokeWidth={0.8} /><line x1={sx + sw} y1={sy} x2={sx} y2={sy + sh / 2} stroke="#AAAAAA" strokeWidth={0.8} /></g>;
+    if (side === "left") return <g opacity={0.5}><line x1={sx} y1={sy + sh} x2={sx + sw} y2={sy} stroke="#A0A0A0" strokeWidth={0.7} /><line x1={sx} y1={sy} x2={sx + sw} y2={sy + sh / 2} stroke="#A0A0A0" strokeWidth={0.7} /></g>;
+    return <g opacity={0.5}><line x1={sx + sw} y1={sy + sh} x2={sx} y2={sy} stroke="#A0A0A0" strokeWidth={0.7} /><line x1={sx + sw} y1={sy} x2={sx} y2={sy + sh / 2} stroke="#A0A0A0" strokeWidth={0.7} /></g>;
   };
 
+  const depth = 8;
+  const frameColor = "#C8C5C0";
+
   if (type === "single") {
-    const vw = 100, vh = 130, pad = 6, gx = 10, gy = 10, gw = 80, gh = 110;
+    const fw = 80, fh = 120;
+    const fx = (VW - fw) / 2, fy = (VH - fh) / 2;
+    const gx = fx + depth, gy = fy + depth, gw = fw - 2 * depth, gh = fh - 2 * depth;
     return (
-      <svg width="140" height="180" viewBox={`0 0 ${vw} ${vh}`}>
+      <svg width="180" height="160" viewBox={`0 0 ${VW} ${VH}`}>
         {glassDef("gs")}
-        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill="white" stroke={frameStroke} strokeWidth={2} />
-        <rect x={gx} y={gy} width={gw} height={gh} rx={1} fill="url(#gs)" stroke={glassStroke} strokeWidth={1} />
+        <rect x={fx} y={fy} width={fw} height={fh} rx={1} fill="white" stroke={frameColor} strokeWidth={1.5} filter="url(#outerShadow)" />
+        {reveal(fx, fy, fw, fh, depth)}
+        <rect x={gx} y={gy} width={gw} height={gh} fill="url(#gs)" stroke={frameColor} strokeWidth={0.8} />
         {hinges(gx + gw - 2, gy, gh, 3)}
         {handle(gx + 1, gy + gh / 2)}
         {diags("right", gx, gy, gw, gh)}
@@ -224,64 +249,84 @@ const PricingWindowSVG = ({ type }: { type: "single" | "double" | "triple" | "ba
   }
 
   if (type === "double") {
-    const vw = 160, vh = 130, pad = 6, impW = 3;
-    const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, gh = vh - 2 * pad - 8, hw = (tw - impW) / 2;
-    const rx = ix + hw + impW;
+    const fw = 140, fh = 120;
+    const fx = (VW - fw) / 2, fy = (VH - fh) / 2;
+    const impW = 3;
+    const gx = fx + depth, gy = fy + depth, totalGW = fw - 2 * depth, gh = fh - 2 * depth;
+    const hw = (totalGW - impW) / 2;
+    const rx = gx + hw + impW;
     return (
-      <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
+      <svg width="180" height="160" viewBox={`0 0 ${VW} ${VH}`}>
         {glassDef("gd")}
-        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill="white" stroke={frameStroke} strokeWidth={2} />
-        <rect x={ix} y={iy} width={hw} height={gh} rx={1} fill="url(#gd)" stroke={glassStroke} strokeWidth={1} />
-        <rect x={ix + hw} y={pad} width={impW} height={vh - 2 * pad} fill={impostFill} />
-        <rect x={rx} y={iy} width={hw} height={gh} rx={1} fill="url(#gd)" stroke={glassStroke} strokeWidth={1} />
-        {hinges(ix, iy, gh, 3)}
-        {handle(ix + hw - 5, iy + gh / 2)}
-        {diags("left", ix, iy, hw, gh)}
+        <rect x={fx} y={fy} width={fw} height={fh} rx={1} fill="white" stroke={frameColor} strokeWidth={1.5} filter="url(#outerShadow)" />
+        {reveal(fx, fy, fw, fh, depth)}
+        <rect x={gx} y={gy} width={hw} height={gh} fill="url(#gd)" stroke={frameColor} strokeWidth={0.8} />
+        <rect x={gx + hw} y={fy + depth} width={impW} height={gh} fill={frameColor} />
+        <rect x={rx} y={gy} width={hw} height={gh} fill="url(#gd)" stroke={frameColor} strokeWidth={0.8} />
+        {hinges(gx, gy, gh, 3)}
+        {handle(gx + hw - 4, gy + gh / 2)}
+        {diags("left", gx, gy, hw, gh)}
       </svg>
     );
   }
 
   if (type === "triple") {
-    const vw = 220, vh = 130, pad = 6, impW = 3;
-    const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, gh = vh - 2 * pad - 8, thW = (tw - 2 * impW) / 3;
-    const cx = ix + thW + impW, rx = ix + 2 * (thW + impW);
+    const fw = 190, fh = 120;
+    const fx = (VW - fw) / 2, fy = (VH - fh) / 2;
+    const impW = 3;
+    const gx = fx + depth, gy = fy + depth, totalGW = fw - 2 * depth, gh = fh - 2 * depth;
+    const thW = (totalGW - 2 * impW) / 3;
+    const cx = gx + thW + impW, rx = gx + 2 * (thW + impW);
     return (
-      <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
+      <svg width="180" height="160" viewBox={`0 0 ${VW} ${VH}`}>
         {glassDef("gt")}
-        <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill="white" stroke={frameStroke} strokeWidth={2} />
-        <rect x={ix} y={iy} width={thW} height={gh} rx={1} fill="url(#gt)" stroke={glassStroke} strokeWidth={1} />
-        <rect x={ix + thW} y={pad} width={impW} height={vh - 2 * pad} fill={impostFill} />
-        <rect x={cx} y={iy} width={thW} height={gh} rx={1} fill="url(#gt)" stroke={glassStroke} strokeWidth={1} />
-        <rect x={cx + thW} y={pad} width={impW} height={vh - 2 * pad} fill={impostFill} />
-        <rect x={rx} y={iy} width={thW} height={gh} rx={1} fill="url(#gt)" stroke={glassStroke} strokeWidth={1} />
-        {hinges(cx, iy, gh, 3)}
-        {handle(cx + thW - 5, iy + gh / 2)}
-        {diags("left", cx, iy, thW, gh)}
+        <rect x={fx} y={fy} width={fw} height={fh} rx={1} fill="white" stroke={frameColor} strokeWidth={1.5} filter="url(#outerShadow)" />
+        {reveal(fx, fy, fw, fh, depth)}
+        <rect x={gx} y={gy} width={thW} height={gh} fill="url(#gt)" stroke={frameColor} strokeWidth={0.8} />
+        <rect x={gx + thW} y={fy + depth} width={impW} height={gh} fill={frameColor} />
+        <rect x={cx} y={gy} width={thW} height={gh} fill="url(#gt)" stroke={frameColor} strokeWidth={0.8} />
+        <rect x={cx + thW} y={fy + depth} width={impW} height={gh} fill={frameColor} />
+        <rect x={rx} y={gy} width={thW} height={gh} fill="url(#gt)" stroke={frameColor} strokeWidth={0.8} />
+        {hinges(cx, gy, gh, 3)}
+        {handle(cx + thW - 4, gy + gh / 2)}
+        {diags("left", cx, gy, thW, gh)}
       </svg>
     );
   }
 
-  // balcony
-  const vw = 180, vh = 180, pad = 6, impW = 3, frmH = 4;
-  const ix = pad + 4, iy = pad + 4, tw = vw - 2 * pad - 8, th = vh - 2 * pad - 8;
-  const dw = tw * 0.45, ww = tw - dw - impW;
-  const dtH = th * (2 / 3) - frmH / 2, dbH = th * (1 / 3) - frmH / 2;
-  const wx = ix + dw + impW;
+  // balcony — narrow door on left, wider window on right (like mosokna)
+  const fw = 160, fh = 140;
+  const fx = (VW - fw) / 2, fy = (VH - fh) / 2;
+  const impW = 3, frmH = 3;
+  const gx = fx + depth, gy = fy + depth, totalGW = fw - 2 * depth, gh = fh - 2 * depth;
+  // Door is ~35% width (narrow), window is ~65% (wider) — like the reference
+  const doorW = Math.round(totalGW * 0.35);
+  const winW = totalGW - doorW - impW;
+  const dtH = Math.round(gh * 0.65 - frmH / 2);
+  const dbH = gh - dtH - frmH;
+  const wx = gx + doorW + impW;
   return (
-    <svg width="180" height="160" viewBox={`0 0 ${vw} ${vh}`}>
+    <svg width="180" height="160" viewBox={`0 0 ${VW} ${VH}`}>
       {glassDef("gb")}
-      <rect x={pad} y={pad} width={vw - 2 * pad} height={vh - 2 * pad} rx={2} fill="white" stroke={frameStroke} strokeWidth={2} />
-      <rect x={ix} y={iy} width={dw} height={dtH} rx={1} fill="url(#gb)" stroke={glassStroke} strokeWidth={1} />
-      <rect x={ix} y={iy + dtH} width={dw} height={frmH} fill={impostFill} />
-      <rect x={ix} y={iy + dtH + frmH} width={dw} height={dbH} rx={1} fill="url(#gb)" stroke={glassStroke} strokeWidth={1} />
-      <rect x={ix + dw} y={pad} width={impW} height={vh - 2 * pad} fill={impostFill} />
-      <rect x={wx} y={iy} width={ww} height={th} rx={1} fill="url(#gb)" stroke={glassStroke} strokeWidth={1} />
-      {hinges(ix, iy, dtH, 3)}
-      {handle(ix + dw - 5, iy + dtH / 2)}
-      {diags("left", ix, iy, dw, dtH)}
-      {hinges(ix, iy + dtH + frmH, dbH, 2)}
-      {handle(ix + dw - 5, iy + dtH + frmH + dbH / 2)}
-      {diags("left", ix, iy + dtH + frmH, dw, dbH)}
+      <rect x={fx} y={fy} width={fw} height={fh} rx={1} fill="white" stroke={frameColor} strokeWidth={1.5} filter="url(#outerShadow)" />
+      {reveal(fx, fy, fw, fh, depth)}
+      {/* Door top */}
+      <rect x={gx} y={gy} width={doorW} height={dtH} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
+      {/* Horizontal impost */}
+      <rect x={gx} y={gy + dtH} width={doorW} height={frmH} fill={frameColor} />
+      {/* Door bottom */}
+      <rect x={gx} y={gy + dtH + frmH} width={doorW} height={dbH} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
+      {/* Vertical impost */}
+      <rect x={gx + doorW} y={fy + depth} width={impW} height={gh} fill={frameColor} />
+      {/* Window — full height, fixed */}
+      <rect x={wx} y={gy} width={winW} height={gh} fill="url(#gb)" stroke={frameColor} strokeWidth={0.8} />
+      {/* Door hardware */}
+      {hinges(gx, gy, dtH, 3)}
+      {handle(gx + doorW - 4, gy + dtH / 2)}
+      {diags("left", gx, gy, doorW, dtH)}
+      {hinges(gx, gy + dtH + frmH, dbH, 2)}
+      {handle(gx + doorW - 4, gy + dtH + frmH + dbH / 2)}
+      {diags("left", gx, gy + dtH + frmH, doorW, dbH)}
     </svg>
   );
 };
