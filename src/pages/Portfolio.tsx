@@ -21,6 +21,9 @@ import doorReal4 from "@/assets/door-real-4.jpg";
 import doorReal5 from "@/assets/door-real-5.jpg";
 import doorReal6 from "@/assets/door-real-6.jpg";
 import doorReal7 from "@/assets/door-real-7.jpg";
+import doorReal8 from "@/assets/door-real-8.jpg";
+import doorReal9 from "@/assets/door-real-9.jpg";
+import doorReal10 from "@/assets/door-real-10.jpg";
 
 // Partitions
 import partitionsOffice from "@/assets/partitions-office.jpg";
@@ -45,6 +48,9 @@ const projects = [
   { img: windowWork5, title: "Подоконник с окном", category: "Окна" },
   { img: windowWork6, title: "Глянцевый подоконник", category: "Окна" },
   // Двери
+  { img: doorReal8, title: "Входная группа с алюминиевыми дверями", category: "Двери" },
+  { img: doorReal9, title: "Трёхстворчатая дверь с фрамугой", category: "Двери" },
+  { img: doorReal10, title: "Раздвижная дверь в интерьере", category: "Двери" },
   { img: doorReal1, title: "Раздвижная балконная дверь", category: "Двери" },
   { img: doorReal3, title: "Входная дверь зелёная ПВХ", category: "Двери" },
   { img: doorReal4, title: "Входная группа магазина", category: "Двери" },
