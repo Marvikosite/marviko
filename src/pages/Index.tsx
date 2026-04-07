@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection, { ParallaxImage } from "@/components/AnimatedSection";
+import PricingWindowSVG from "@/components/PricingWindowSVG";
 
 
 import heroImg from "@/assets/hero-interior.jpg";
