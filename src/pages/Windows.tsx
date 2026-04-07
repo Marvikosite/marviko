@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SectionLabel from "@/components/SectionLabel";
 import AnimatedSection from "@/components/AnimatedSection";
-import WindowDrawing from "@/components/WindowDrawing";
+import PricingWindowSVG from "@/components/PricingWindowSVG";
 
 import windowWork1 from "@/assets/window-work-1.jpg";
 import windowWork2 from "@/assets/window-work-2.jpg";
