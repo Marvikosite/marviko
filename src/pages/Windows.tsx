@@ -82,12 +82,15 @@ const WindowsPage = () => {
       <Navbar onOrderClick={() => setOrderModal(true)} />
 
       {/* Hero */}
-      <section className="py-20 relative" style={{ backgroundColor: "hsl(var(--warm-gray))" }}>
-        <div className="container mx-auto section-padding">
+      <section className="dark-section py-20 relative" style={{ background: "linear-gradient(135deg, hsl(var(--dark-bg)), #3A2518)" }}>
+        <div className="absolute inset-0 opacity-15">
+          <img src={windowWork8} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="container mx-auto section-padding relative z-10">
           <AnimatedSection>
             <SectionLabel>Окна ПВХ</SectionLabel>
             <h1 className="text-4xl sm:text-5xl text-display mb-6 max-w-2xl">Пластиковые окна для вашего дома</h1>
-            <p className="text-lg text-body text-muted-foreground max-w-xl">
+            <p className="text-lg text-body max-w-xl" style={{ color: "hsl(var(--muted-foreground))" }}>
               Энергосберегающие окна с двухкамерным стеклопакетом. Бесплатный замер и доставка по Червеню и Минской области.
             </p>
           </AnimatedSection>
