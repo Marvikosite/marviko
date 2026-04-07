@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Clock, Mail, ArrowRight } from "lucide-react";
 import viberIcon from "@/assets/viber-icon.png";
+import marvikoLogo from "@/assets/marviko-logo.png";
 
 const ViberIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
@@ -27,14 +28,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div>
-            <Link to="/" className="flex items-center gap-2.5 mb-5">
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center text-primary-foreground font-extrabold text-lg"
-                style={{ background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)))" }}
-              >
-                М
-              </div>
-              <span className="text-xl font-bold tracking-tight">Марвико</span>
+            <Link to="/" className="mb-5 inline-block">
+              <img src={marvikoLogo} alt="Марвико" className="h-14" />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: "hsl(0 0% 60%)" }}>
               ООО «Марвико». Производство и установка окон, дверей и балконов. Работаем с 2007 года.
