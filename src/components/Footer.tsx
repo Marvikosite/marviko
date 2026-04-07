@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Clock, Mail, ArrowRight } from "lucide-react";
 import viberIcon from "@/assets/viber-icon.png";
+import marvikoLogo from "@/assets/marviko-logo.png";
 
 const ViberIcon = () => (
   <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
